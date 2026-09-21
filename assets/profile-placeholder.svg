@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 880" role="img" aria-labelledby="title desc">
+  <title id="title">个人照片占位图</title>
+  <desc id="desc">请将此文件替换为你的个人照片</desc>
+  <rect width="720" height="880" fill="#e9edf0"/>
+  <rect x="32" y="32" width="656" height="816" fill="none" stroke="#c1cbd3" stroke-width="2"/>
+  <circle cx="360" cy="304" r="142" fill="#b8c4cd"/>
+  <path d="M211 314c0-94 63-164 151-164 86 0 145 63 149 144-35-22-78-43-129-57-55 48-111 68-171 77Z" fill="#536b7c"/>
+  <path d="M154 742c20-166 94-255 206-255 110 0 187 89 206 255H154Z" fill="#6e8291"/>
+  <path d="M303 375c35 23 79 23 114 0" fill="none" stroke="#6e8291" stroke-width="8" stroke-linecap="round"/>
+</svg>
