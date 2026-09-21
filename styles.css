@@ -485,7 +485,7 @@ img {
 .news-date {
   color: var(--navy-color);
   font-family: var(--mono-font);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
 }
 
