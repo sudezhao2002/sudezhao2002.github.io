@@ -38,9 +38,19 @@ python -m http.server 8000
 
 ## 部署到 GitHub Pages
 
+推送到 `main` 后，GitHub Actions 会自动运行 `runBeforeUpdate.sh` 同步 CSS 版本号，然后发布网站，无需在本地手动执行。版本号修改仅用于发布产物，不会额外提交回仓库。
+
+如果需要本地预览最新版本号，可在项目目录运行：
+
+```bash
+bash runBeforeUpdate.sh
+```
+
+脚本适用于 Linux、macOS 和 Windows 的 Git Bash，无需 Python。它会自动计算 CSS 文件 SHA256 的前 12 位，并同步更新 `index.html` 和 `en.html` 中的样式版本号；内容未变时不会重复写入，成功后打印 `css同步成功`。将 CSS 和更新后的 HTML 一起提交推送即可，浏览器会请求新的样式地址，避免沿用旧缓存。
+
 1. 新建名为 `你的用户名.github.io` 的公开仓库。
 2. 将本目录文件提交并推送到仓库的 `main` 分支。
-3. 在仓库 **Settings → Pages** 中选择 **Deploy from a branch**，分支选择 `main`，目录选择 `/ (root)`。
+3. 在仓库 **Settings → Pages → Build and deployment → Source** 中选择 **GitHub Actions**（仅需设置一次）。
 4. 稍等片刻后访问 `https://你的用户名.github.io/`。
 
 如果部署到普通项目仓库（例如 `homepage`），本项目使用的都是相对路径，同样可以直接运行在 `https://你的用户名.github.io/homepage/` 下。
