@@ -606,8 +606,8 @@ img {
 }
 
 .publication-authors strong {
-  color: var(--accent-color);
-  font-weight: 600;
+  color: #000000;
+  font-weight: 700;
 }
 
 .publication-venue {
