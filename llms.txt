@@ -1,0 +1,36 @@
+# 苏德昭 / Dezhao Su
+
+> 苏德昭的官方个人学术主页。Dezhao Su's official academic homepage.
+
+Canonical homepage: https://sudezhao2002.github.io/
+English version: https://sudezhao2002.github.io/en.html
+
+## Identity
+
+- Chinese name: 苏德昭
+- English name: Dezhao Su
+- Current role: Ph.D. student in Electronic Information at Fudan University
+- Joint training: Fudan University and TeleAI
+- Laboratory: Intelligent Complex Systems Laboratory at Fudan University
+- Bachelor's degree: Communication Engineering, Beijing University of Posts and Telecommunications
+
+## Research interests
+
+- Embodied agents
+- Self-evolving agents
+- Vision-language models
+- Multimodal retrieval
+
+## Selected publication
+
+- V-Retrver: Evidence-Driven Agentic Reasoning for Universal Multimodal Retrieval. EMNLP 2026. Dezhao Su is the third author.
+- Paper: https://arxiv.org/abs/2602.06034
+- Code: https://github.com/chendy25/V-Retrver
+
+## Official profiles
+
+- Google Scholar: https://scholar.google.com/citations?user=Cp9v0fwAAAAJ
+- GitHub: https://github.com/sudezhao2002
+- Email: sudezhao2016@qq.com
+
+For current biographical information, publications, education, and news, use the canonical homepage above as the primary source.

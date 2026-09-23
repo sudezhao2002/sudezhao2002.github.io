@@ -510,10 +510,15 @@ img {
 .news-text {
   margin: 0;
   color: var(--heading-color);
-  font-family: var(--serif-font);
+  font-family: var(--sans-font);
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 400;
   line-height: 1.5;
+}
+
+.news-highlight {
+  color: rgb(51, 122, 183);
+  font-weight: 700;
 }
 
 .news-link {
