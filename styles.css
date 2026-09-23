@@ -316,7 +316,14 @@ img {
 /* ---------- 首页介绍 ---------- */
 
 .about-section {
-  padding-bottom: 56px;
+  padding: 0 0 30px;
+}
+
+.news-section,
+.publications-section,
+.journey-section,
+.contact-section {
+  padding: 30px 0;
 }
 
 .about-content {
@@ -370,14 +377,6 @@ img {
   margin-top: 18px;
   padding-top: 15px;
   border-top: 1px solid var(--line-color);
-}
-
-.about-summary-title {
-  margin: 0 0 7px;
-  color: var(--heading-color);
-  font-family: var(--serif-font);
-  font-size: 19px;
-  font-weight: 600;
 }
 
 .about-summary-text {
@@ -459,10 +458,6 @@ img {
 
 /* ---------- 最新动态 ---------- */
 
-.news-section {
-  padding: 56px 0;
-}
-
 .news-heading {
   margin-bottom: 22px;
 }
@@ -471,7 +466,7 @@ img {
   display: flex;
   margin: 0;
   color: var(--heading-color);
-  font-family: var(--serif-font);
+  font-family: var(--sans-font);
   font-size: 30px;
   font-weight: 600;
   line-height: 1.2;
@@ -492,7 +487,7 @@ img {
 
 .news-item {
   display: grid;
-  min-height: 54px;
+  min-height: 40px;
   padding: 8px 4px;
   border-bottom: 1px solid var(--line-color);
   grid-template-columns: 90px minmax(0, 1fr) 28px;
@@ -538,10 +533,6 @@ img {
 
 /* ---------- 代表性论文 ---------- */
 
-.publications-section {
-  padding: 56px 0;
-}
-
 .publications-heading {
   margin-bottom: 22px;
 }
@@ -550,7 +541,7 @@ img {
   display: flex;
   margin: 0;
   color: var(--heading-color);
-  font-family: var(--serif-font);
+  font-family: var(--sans-font);
   font-size: 30px;
   font-weight: 600;
   line-height: 1.2;
@@ -564,7 +555,7 @@ img {
 
 .publication-card {
   display: grid;
-  padding: 30px 0;
+  padding: 20px 0;
   border-bottom: 1px solid var(--line-color);
   grid-template-columns: 230px minmax(0, 1fr);
   align-items: center;
@@ -651,10 +642,6 @@ img {
 
 /* ---------- 学术经历 ---------- */
 
-.journey-section {
-  padding: 56px 0;
-}
-
 .journey-heading {
   margin-bottom: 32px;
 }
@@ -663,7 +650,7 @@ img {
   display: flex;
   margin: 0;
   color: var(--heading-color);
-  font-family: var(--serif-font);
+  font-family: var(--sans-font);
   font-size: 30px;
   font-weight: 600;
   line-height: 1.2;
@@ -710,7 +697,7 @@ img {
 
 .timeline-item {
   display: grid;
-  padding: 18px 4px;
+  padding: 10px 4px;
   border-bottom: 1px solid var(--line-color);
   grid-template-columns: 160px minmax(0, 1fr);
   gap: 28px;
@@ -730,7 +717,7 @@ img {
   margin: 0;
   color: var(--heading-color);
   font-family: var(--serif-font);
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
   gap: 24px;
 }
@@ -756,7 +743,7 @@ img {
   margin: 0;
   color: var(--heading-color);
   font-family: var(--serif-font);
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 600;
 }
 
@@ -774,10 +761,6 @@ img {
 }
 
 /* ---------- 联系方式 ---------- */
-
-.contact-section {
-  padding: 32px 0 20px;
-}
 
 .contact-card {
   position: relative;
@@ -809,7 +792,7 @@ img {
 .contact-title {
   margin: 0;
   color: var(--white-color);
-  font-family: var(--serif-font);
+  font-family: var(--sans-font);
   font-size: 25px;
   font-weight: 600;
   line-height: 1.2;
@@ -932,10 +915,6 @@ img {
     top: 96px;
   }
 
-  .about-section {
-    padding-bottom: 40px;
-  }
-
   .about-name {
     font-size: 34px;
   }
@@ -944,18 +923,8 @@ img {
     font-size: 15px;
   }
 
-  .about-summary-title {
-    font-size: 17px;
-  }
-
   .about-summary-text {
     font-size: 14px;
-  }
-
-  .news-section,
-  .publications-section,
-  .journey-section {
-    padding: 40px 0;
   }
 
   .news-title,
@@ -970,7 +939,7 @@ img {
   }
 
   .publication-card {
-    padding: 24px 0;
+    padding: 18px 0;
   }
 
   .publication-title {
@@ -989,9 +958,6 @@ img {
     font-size: 13px;
   }
 
-  .experience-role {
-    font-size: 16px;
-  }
 
   .experience-organization {
     font-size: 14px;
@@ -1169,7 +1135,7 @@ img {
   }
 
   .publication-card {
-    padding: 30px 0;
+    padding: 20px 0;
     grid-template-columns: 1fr;
     gap: 24px;
   }
@@ -1179,17 +1145,13 @@ img {
   }
 
   .timeline-item {
-    padding: 16px 4px;
+    padding: 14px 4px;
     grid-template-columns: 1fr;
     gap: 5px;
   }
 
   .timeline-date {
     padding-top: 0;
-  }
-
-  .contact-section {
-    padding-bottom: 0;
   }
 
   .contact-card {
