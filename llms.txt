@@ -21,7 +21,10 @@ English version: https://sudezhao2002.github.io/en.html
 - Vision-language models
 - Multimodal retrieval
 
-## Selected publication
+## Selected publications
+
+- SELC: Synergistic Text-Motion Enhancement and Latent Constraint Modeling for Text-to-Motion Generation. IEEE Transactions on Multimedia (TMM), 2026. Dezhao Su is the third author.
+- Paper: https://ieeexplore.ieee.org/document/11737585
 
 - V-Retrver: Evidence-Driven Agentic Reasoning for Universal Multimodal Retrieval. EMNLP 2026. Dezhao Su is the third author.
 - Paper: https://arxiv.org/abs/2602.06034
