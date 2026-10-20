@@ -606,6 +606,14 @@ img {
   font-weight: 700;
 }
 
+.corresponding-author {
+  margin-left: 2px;
+  font-family: Arial, sans-serif;
+  font-size: 0.75em;
+  line-height: 0;
+  vertical-align: super;
+}
+
 .publication-venue {
   margin: 3px 0;
   color: var(--text-color);

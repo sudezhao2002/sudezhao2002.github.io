@@ -23,6 +23,9 @@ English version: https://sudezhao2002.github.io/en.html
 
 ## Selected publications
 
+- From Tasks to Turns: Measuring Human Labor Contributions in Human–Agent Joint Production. arXiv preprint, 2026. Likai Wang and Dezhao Su are co-first authors; Dezhao Su is listed second.
+- Paper: https://arxiv.org/pdf/2610.26365
+
 - SELC: Synergistic Text-Motion Enhancement and Latent Constraint Modeling for Text-to-Motion Generation. IEEE Transactions on Multimedia (TMM), 2026. Dezhao Su is the third author.
 - Paper: https://ieeexplore.ieee.org/document/11737585
 
