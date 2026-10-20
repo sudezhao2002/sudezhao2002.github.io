@@ -248,18 +248,36 @@ img {
   display: grid;
   padding-top: 116px;
   margin: 0 100px;
-  grid-template-columns:250px minmax(0, 1500px);
+  grid-template-columns: 250px minmax(0, 1fr);
   column-gap: 50px;
 }
 
 .profile-sidebar {
-  position: sticky;
-  top: 116px;
+  position: static;
+  grid-column: 1;
+  grid-row: 1;
   align-self: start;
+  padding-bottom: 30px;
 }
 
 .main-content {
+  display: contents;
+}
+
+.main-content > * {
   min-width: 0;
+  grid-column: 1 / -1;
+}
+
+.main-content > .about-section {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+@media (min-width: 721px) {
+  .main-content > :not(.about-section) {
+    margin-left: 40px;
+  }
 }
 
 /* ---------- 左侧个人卡片 ---------- */
@@ -555,7 +573,7 @@ img {
 
 .publication-card {
   display: grid;
-  padding: 14px 0;
+  padding: 10px 0;
   border-bottom: 1px solid var(--line-color);
   grid-template-columns: 230px minmax(0, 1fr);
   align-items: center;
@@ -586,19 +604,19 @@ img {
 }
 
 .publication-title {
-  margin: 0 0 6px;
+  margin: 0 0 4px;
   color: var(--heading-color);
-  font-family: Georgia, "Times New Roman", var(--serif-font);
+  font-family: "Times New Roman", Times, var(--serif-font);
   font-size: 23px;
-  font-weight: 600;
-  line-height: 1.3;
+  font-weight: 700;
+  line-height: 1.2;
 }
 
 .publication-authors {
-  margin: 3px 0;
+  margin: 2px 0;
   color: var(--muted-color);
   font-size: 13px;
-  line-height: 1.55;
+  line-height: 1.45;
 }
 
 .publication-authors strong {
@@ -615,26 +633,26 @@ img {
 }
 
 .publication-venue {
-  margin: 3px 0;
+  margin: 2px 0;
   color: var(--text-color);
   font-size: 14px;
   font-style: normal;
-  line-height: 1.55;
+  line-height: 1.45;
 }
 
 .publication-description {
   max-width: 880px;
-  margin: 6px 0 0;
+  margin: 4px 0 0;
   color: var(--muted-color);
   font-size: 13px;
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 .publication-links {
   display: flex;
   flex-wrap: wrap;
   gap: 17px;
-  margin-top: 8px;
+  margin-top: 4px;
 }
 
 .publication-link {
@@ -914,13 +932,9 @@ img {
 
   .page-layout {
     padding-top: 96px;
-    grid-template-columns: 190px minmax(0, 1500px);
+    grid-template-columns: 190px minmax(0, 1fr);
     column-gap: 40px;
     margin: 0 80px;
-  }
-
-  .profile-sidebar {
-    top: 96px;
   }
 
   .about-name {
@@ -1066,9 +1080,11 @@ img {
     width: 240px;
     max-width: 100%;
     margin: 0 auto;
+    padding-bottom: 0;
   }
 
   .main-content {
+    display: block;
     width: 100%;
   }
 
@@ -1145,7 +1161,7 @@ img {
 
   .publication-card {
     grid-template-columns: 1fr;
-    gap: 14px;
+    gap: 10px;
   }
 
   .publication-image-link {
