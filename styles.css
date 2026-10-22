@@ -725,8 +725,17 @@ img {
   display: grid;
   padding: 10px 4px;
   border-bottom: 1px solid var(--line-color);
-  grid-template-columns: 160px minmax(0, 1fr);
+  grid-template-columns: 160px minmax(0, 1fr) 96px;
   gap: 28px;
+}
+
+.experience-logo {
+  display: block;
+  width: 96px;
+  height: 44px;
+  object-fit: contain;
+  justify-self: end;
+  align-self: center;
 }
 
 .timeline-date {
@@ -791,7 +800,7 @@ img {
 .contact-card {
   position: relative;
   overflow: hidden;
-  padding: 26px 48px;
+  padding: 16px 48px;
   color: var(--white-color);
   background: var(--dark-navy-color);
 }
@@ -835,8 +844,8 @@ img {
   position: relative;
   z-index: 2;
   display: flex;
-  margin-top: 16px;
-  padding: 8px 0;
+  margin-top: 10px;
+  padding: 4px 0;
   border-top: 1px solid rgba(255, 255, 255, 0.28);
   border-bottom: 1px solid rgba(255, 255, 255, 0.28);
   font-family: var(--mono-font);
@@ -1170,8 +1179,19 @@ img {
 
   .timeline-item {
     padding: 14px 4px;
-    grid-template-columns: 1fr;
-    gap: 5px;
+    grid-template-columns: minmax(0, 1fr) 64px;
+    gap: 5px 12px;
+  }
+
+  .timeline-item > .timeline-date {
+    grid-column: 1 / -1;
+  }
+
+  .timeline-item > .experience-logo {
+    grid-column: 2;
+    grid-row: 2;
+    width: 64px;
+    height: 40px;
   }
 
   .timeline-date {
@@ -1179,7 +1199,7 @@ img {
   }
 
   .contact-card {
-    padding: 24px 22px;
+    padding: 16px 22px;
   }
 
   .site-footer {
