@@ -249,6 +249,37 @@
             <article class="publication-card reveal">
               <a
                 class="publication-image-link"
+                href="assets/resa-figure-1.png"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="View Figure 1 of the ReSA paper"
+              >
+                <img
+                  class="publication-image"
+                  src="assets/resa-figure-1.png"
+                  alt="ReSA Figure 1: foreground coverage, missed and extra foreground, and segmentation performance across ten benchmarks"
+                  width="1488"
+                  height="534"
+                  loading="lazy"
+                />
+              </a>
+
+              <div class="publication-details">
+                <h3 class="publication-title">ReSA: Preserving Reference-Specified Foreground in In-Context Segmentation</h3>
+                <p class="publication-authors">
+                  <strong>Dezhao Su</strong><sup class="corresponding-author" title="Corresponding author" aria-label="Corresponding author">✉&#xfe0e;</sup>, Bingxu Hou, Jingdi Lei,
+                  Lin Qian, Likai Wang, Yunyun Wan
+                </p>
+                <p class="publication-venue">arXiv preprint, 2026</p>
+                <p class="publication-description">
+                  ReSA is a reference-guided in-context segmentation framework that unifies query adaptation and mask selection through a shared reference kernel, with threshold-aligned boundary refinement to reduce missed foreground and false positives. It uses a frozen visual encoder and lightweight test-time adaptation, requires no offline task training, and achieves competitive results across ten object, part, and cross-domain segmentation benchmarks.
+                </p>
+              </div>
+            </article>
+
+            <article class="publication-card reveal">
+              <a
+                class="publication-image-link"
                 href="assets/tasks-to-turns-framework.png"
                 target="_blank"
                 rel="noreferrer"
@@ -268,7 +299,7 @@
                 <h3 class="publication-title">From Tasks to Turns: Measuring Human Labor Contributions in Human–Agent Joint Production</h3>
                 <p class="publication-authors">
                   Likai Wang<sup>*</sup><sup class="corresponding-author" title="Corresponding author" aria-label="Corresponding author">✉&#xfe0e;</sup>, <strong>Dezhao Su</strong><sup>*</sup>, Jing Hu,
-                  Yunyun Wan, Jingdi Lei, Xinhai Li<sup class="corresponding-author" title="Corresponding author" aria-label="Corresponding author">✉&#xfe0e;</sup>
+                  Yunyun Wan, Jingdi Lei, Xinhai Li
                 </p>
                 <p class="publication-venue">arXiv preprint, 2026</p>
                 <p class="publication-description">
@@ -490,5 +521,9 @@
         </footer>
       </div>
     </main>
+    <dialog class="image-viewer" aria-label="Paper image preview">
+      <button class="image-viewer-close" type="button" aria-label="Close image preview" autofocus>×</button>
+      <img class="image-viewer-image" alt="" draggable="false" />
+    </dialog>
   </body>
 </html>

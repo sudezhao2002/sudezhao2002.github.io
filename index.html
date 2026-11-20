@@ -251,6 +251,37 @@
             <article class="publication-card reveal">
               <a
                 class="publication-image-link"
+                href="assets/resa-figure-1.png"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="查看 ReSA 论文 Figure 1 原图"
+              >
+                <img
+                  class="publication-image"
+                  src="assets/resa-figure-1.png"
+                  alt="ReSA 论文图 1：前景覆盖、遗漏与误检，以及十个基准上的分割性能对比"
+                  width="1488"
+                  height="534"
+                  loading="lazy"
+                />
+              </a>
+
+              <div class="publication-details">
+                <h3 class="publication-title">ReSA: Preserving Reference-Specified Foreground in In-Context Segmentation</h3>
+                <p class="publication-authors">
+                  <strong>Dezhao Su</strong><sup class="corresponding-author" title="通讯作者" aria-label="通讯作者">✉&#xfe0e;</sup>, Bingxu Hou, Jingdi Lei,
+                  Lin Qian, Likai Wang, Yunyun Wan
+                </p>
+                <p class="publication-venue">arXiv preprint, 2026</p>
+                <p class="publication-description">
+                  提出参考引导的上下文分割框架 ReSA，通过共享参考核统一查询适配与掩码选择，并结合阈值对齐的边界细化，减少前景遗漏和误检。方法使用冻结的视觉编码器与轻量测试时适配，无需离线任务训练，并在十个物体、部件及跨域分割基准上取得有竞争力的结果。
+                </p>
+              </div>
+            </article>
+
+            <article class="publication-card reveal">
+              <a
+                class="publication-image-link"
                 href="assets/tasks-to-turns-framework.png"
                 target="_blank"
                 rel="noreferrer"
@@ -270,7 +301,7 @@
                 <h3 class="publication-title">From Tasks to Turns: Measuring Human Labor Contributions in Human–Agent Joint Production</h3>
                 <p class="publication-authors">
                   Likai Wang<sup>*</sup><sup class="corresponding-author" title="通讯作者" aria-label="通讯作者">✉&#xfe0e;</sup>, <strong>Dezhao Su</strong><sup>*</sup>, Jing Hu,
-                  Yunyun Wan, Jingdi Lei, Xinhai Li<sup class="corresponding-author" title="通讯作者" aria-label="通讯作者">✉&#xfe0e;</sup>
+                  Yunyun Wan, Jingdi Lei, Xinhai Li
                 </p>
                 <p class="publication-venue">arXiv preprint, 2026</p>
                 <p class="publication-description">
@@ -492,5 +523,9 @@
         </footer>
       </div>
     </main>
+    <dialog class="image-viewer" aria-label="论文大图预览">
+      <button class="image-viewer-close" type="button" aria-label="关闭大图" autofocus>×</button>
+      <img class="image-viewer-image" alt="" draggable="false" />
+    </dialog>
   </body>
 </html>
