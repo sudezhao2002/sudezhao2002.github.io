@@ -96,11 +96,62 @@ currentYear.textContent = new Date().getFullYear();
 updateReadingProgress();
 updateActiveNavigation();
 
+// 列表先显示 WebP 缩略图；四张缩略图就绪后，自动在后台缓存 COS 高清原图。
+const publicationImageLinks = [...document.querySelectorAll(".publication-image-link")];
+const publicationFullImages = new Map();
+const publicationThumbnailsReady = Promise.all(publicationImageLinks.map((link) => {
+  const thumbnail = link.querySelector("img");
+  return new Promise((resolve) => {
+    const finish = () => {
+      if (thumbnail.naturalWidth > 0) thumbnail.decode().catch(() => {}).then(resolve);
+      else resolve();
+    };
+    if (thumbnail.complete) finish();
+    else {
+      thumbnail.addEventListener("load", finish, { once: true });
+      thumbnail.addEventListener("error", finish, { once: true });
+    }
+  });
+}));
+
+function loadPublicationFullImage(url, priority = "low") {
+  const existing = publicationFullImages.get(url);
+  if (existing) {
+    if (priority === "high") existing.image.fetchPriority = "high";
+    return existing;
+  }
+
+  const entry = { image: new Image(), ready: false, promise: null };
+  entry.image.decoding = "async";
+  entry.image.fetchPriority = priority;
+  entry.promise = new Promise((resolve) => {
+    entry.image.onload = async () => {
+      try {
+        await entry.image.decode();
+        entry.ready = true;
+        resolve(true);
+      } catch {
+        resolve(false);
+      }
+    };
+    entry.image.onerror = () => resolve(false);
+  });
+  publicationFullImages.set(url, entry);
+  entry.image.src = url;
+  return entry;
+}
+
+publicationThumbnailsReady.then(() => {
+  publicationImageLinks.forEach((link) => loadPublicationFullImage(link.href));
+});
+
 // 论文大图：原生 dialog 提供 Esc 关闭和键盘焦点限制。
 const imageViewer = document.querySelector(".image-viewer");
 const imageViewerImage = document.querySelector(".image-viewer-image");
 const imageViewerClose = document.querySelector(".image-viewer-close");
+const imageViewerStatus = document.querySelector(".image-viewer-status");
 let imageViewerTrigger = null;
+let imageViewerRequestId = 0;
 let imageViewerScale = 1;
 let imageViewerX = 0;
 let imageViewerY = 0;
@@ -148,18 +199,56 @@ function getImageViewerPinch() {
   };
 }
 
-document.querySelectorAll(".publication-image-link").forEach((link) => {
+// 按高清图比例固定预览尺寸，缩略图切换为原图时不跳动，并保留拖动和缩放状态。
+function fitImageViewer() {
+  if (!imageViewer.open || !imageViewerTrigger) return;
+  const thumbnail = imageViewerTrigger.querySelector("img");
+  const width = Number(thumbnail.getAttribute("width")) || thumbnail.naturalWidth;
+  const height = Number(thumbnail.getAttribute("height")) || thumbnail.naturalHeight;
+  const padding = getComputedStyle(imageViewer);
+  const availableWidth = imageViewer.clientWidth - parseFloat(padding.paddingLeft) - parseFloat(padding.paddingRight);
+  const availableHeight = imageViewer.clientHeight - parseFloat(padding.paddingTop) - parseFloat(padding.paddingBottom);
+  const scale = Math.min(1, availableWidth / width, availableHeight / height);
+  imageViewerImage.style.width = `${width * scale}px`;
+  imageViewerImage.style.height = `${height * scale}px`;
+}
+
+window.addEventListener("resize", fitImageViewer);
+
+publicationImageLinks.forEach((link) => {
   link.addEventListener("click", (event) => {
     if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
     if (!imageViewer || typeof imageViewer.showModal !== "function") return;
 
     event.preventDefault();
     resetImageViewer();
+    const requestId = ++imageViewerRequestId;
+    const thumbnail = link.querySelector("img");
+    const cached = publicationFullImages.get(link.href);
     imageViewerTrigger = link;
-    imageViewerImage.src = link.href;
-    imageViewerImage.alt = link.querySelector("img").alt;
+    imageViewerImage.src = cached?.ready ? link.href : thumbnail.currentSrc || thumbnail.src;
+    imageViewerImage.alt = thumbnail.alt;
+    imageViewerStatus.hidden = Boolean(cached?.ready);
+    imageViewerStatus.textContent = isEnglishPage ? "Loading high-resolution image…" : "正在加载高清图…";
     document.body.classList.add("image-viewer-open");
     imageViewer.showModal();
+    fitImageViewer();
+
+    if (!cached?.ready) {
+      publicationThumbnailsReady
+        .then(() => loadPublicationFullImage(link.href, "high").promise)
+        .then((loaded) => {
+          if (!imageViewer.open || requestId !== imageViewerRequestId) return;
+          if (loaded) {
+            imageViewerImage.src = link.href;
+            imageViewerStatus.hidden = true;
+          } else {
+            imageViewerStatus.textContent = isEnglishPage
+              ? "High-resolution image unavailable; showing preview."
+              : "高清图暂时无法加载，当前显示预览图。";
+          }
+        });
+    }
   });
 });
 
@@ -222,8 +311,10 @@ imageViewer.addEventListener("pointerup", endImageViewerPointer);
 imageViewer.addEventListener("pointercancel", endImageViewerPointer);
 imageViewer.addEventListener("lostpointercapture", endImageViewerPointer);
 imageViewer.addEventListener("close", () => {
+  imageViewerRequestId++;
   resetImageViewer();
   document.body.classList.remove("image-viewer-open");
   imageViewerImage.removeAttribute("src");
+  imageViewerStatus.hidden = true;
   imageViewerTrigger?.focus({ preventScroll: true });
 });

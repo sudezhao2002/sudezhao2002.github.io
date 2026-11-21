@@ -10,7 +10,7 @@
   学术经历标题：journey-title
   联系标题：contact-title
   论文标题：publication-title
-  大图预览：image-viewer / image-viewer-image / image-viewer-close
+  大图预览：image-viewer / image-viewer-image / image-viewer-close / image-viewer-status
 */
 
 :root {
@@ -672,6 +672,20 @@ body.image-viewer-open {
 .image-viewer-close:focus-visible {
   outline: 2px solid #ffffff;
   outline-offset: 3px;
+}
+
+.image-viewer-status {
+  position: fixed;
+  z-index: 1;
+  top: 24px;
+  left: 20px;
+  right: 80px;
+  margin: 0;
+  color: #dddddd;
+  font-family: var(--sans-font);
+  font-size: 14px;
+  line-height: 1.5;
+  pointer-events: none;
 }
 
 .publication-details {
