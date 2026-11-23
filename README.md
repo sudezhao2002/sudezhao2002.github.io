@@ -68,4 +68,4 @@ bash runBeforeUpdate.sh
     └── profile-placeholder.svg
 ```
 
-页面仅通过 Google Fonts 加载字体；如果你希望完全离线，可删除 `styles.css` 第一行的 `@import`，页面会自动使用系统字体。
+页面使用的 Noto Sans SC 和 Noto Serif SC 字体已保存在 `assets/fonts/`，入口为 `assets/fonts/fonts.css`，原始授权文件也保存在该目录中。浏览器按页面用字加载需要的字体分片，无需访问 Google 字体服务；字体异步加载期间先使用系统字体，不阻塞正文和图片显示。
