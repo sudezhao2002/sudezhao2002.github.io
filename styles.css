@@ -2,6 +2,7 @@
   CSS 快速修改说明（直接 Ctrl+F 搜索类名）：
   顶部栏：site-header
   左侧头像栏：profile-sidebar / profile-photo
+  小眼睛浏览次数：profile-views / profile-views-icon / profile-views-count
   姓名：about-name
   最新动态标题：news-title
   代表性论文标题：publications-title
@@ -253,7 +254,7 @@ img {
 }
 
 .profile-sidebar {
-  position: static;
+  position: relative;
   grid-column: 1;
   grid-row: 1;
   align-self: start;
@@ -329,6 +330,32 @@ img {
   color: var(--navy-color);
   border-top: 0;
   font-weight: 600;
+}
+
+/* 使用头像卡片下方原有的 30px 留白，不增加侧栏和下方内容的高度。 */
+.profile-views {
+  position: absolute;
+  left: 16px;
+  bottom: 5px;
+  display: flex;
+  height: 20px;
+  margin: 0;
+  color: #666666;
+  font-size: 12px;
+  line-height: 20px;
+  white-space: nowrap;
+  align-items: center;
+  gap: 5px;
+}
+
+.profile-views-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.profile-views-count {
+  font-variant-numeric: tabular-nums;
 }
 
 /* ---------- 首页介绍 ---------- */
@@ -1173,11 +1200,16 @@ body.image-viewer-open {
   }
 
   .profile-sidebar {
-    position: static;
+    position: relative;
     width: 240px;
     max-width: 100%;
     margin: 0 auto;
     padding-bottom: 0;
+  }
+
+  /* 手机端使用头像与简介之间原有的 32px 留白。 */
+  .profile-views {
+    bottom: -26px;
   }
 
   .main-content {

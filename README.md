@@ -75,3 +75,9 @@ bash runBeforeUpdate.sh
 列表缩略图保存在 `assets/thumbnails/`，宽度 800 像素。中清备用图保存在 `assets/previews/`，最大宽度 1600 像素，原图小于该尺寸时不放大。两者均由 `assets/` 下的原始 PNG 生成，使用 WebP 格式、质量参数 94。
 
 中英文页面的 `.publication-image-link` 中，`href` 是 COS 原图地址，`data-preview-src` 是中清备用图地址，内部 `<img>` 的 `src` 是列表缩略图地址。缩略图加载完后，页面自动预载 COS 原图；COS 报错或等待超过 6 秒时预载备用图。点开图片后优先显示已加载的原图，否则显示备用图，原图稍后加载成功时自动替换，保留当前缩放和拖动位置。
+
+## 浏览次数
+
+头像卡片下方的小眼睛显示全站累计浏览次数（PV），中英文页面共用数据，刷新或切换页面都会计数，统计从接入时开始。数据来自[不蒜子统计服务](https://www.busuanzi.cc/doc.php)，只在正式域名 `sudezhao2002.github.io` 上请求，且等缩略图加载完后再加载；请求失败时显示“—”。
+
+在 `styles.css` 中 Ctrl+F 搜索 `.profile-views` 可修改位置、字号和颜色。计数占用已有留白，不会把下方内容向下推。

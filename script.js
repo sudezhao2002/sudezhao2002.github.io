@@ -350,3 +350,29 @@ imageViewer.addEventListener("close", () => {
   imageViewerStatus.hidden = true;
   imageViewerTrigger?.focus({ preventScroll: true });
 });
+
+// 浏览次数：中英文页面共用全站 PV，缩略图就绪后再异步请求。
+async function loadSiteViews() {
+  const counter = document.querySelector(".profile-views-count");
+  if (!counter || window.location.hostname !== "sudezhao2002.github.io") return;
+
+  try {
+    const response = await fetch("https://cdn.busuanzi.cc/api.php", {
+      method: "POST",
+      body: JSON.stringify({ url: window.location.href, referrer: document.referrer }),
+      signal: AbortSignal.timeout(8000),
+      priority: "low",
+    });
+    if (!response.ok) return;
+
+    const data = await response.json();
+    const views = Number(data.busuanzi_site_pv);
+    if (Number.isSafeInteger(views) && views > 0) {
+      counter.textContent = views.toLocaleString(isEnglishPage ? "en-US" : "zh-CN");
+    }
+  } catch {
+    // 统计服务不可用时保留“—”，不显示虚构数字，也不影响页面使用。
+  }
+}
+
+publicationThumbnailsReady.then(loadSiteViews);
