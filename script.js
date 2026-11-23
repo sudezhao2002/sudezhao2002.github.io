@@ -96,7 +96,7 @@ currentYear.textContent = new Date().getFullYear();
 updateReadingProgress();
 updateActiveNavigation();
 
-// 列表先显示 WebP 缩略图；四张缩略图就绪后，自动在后台缓存 COS 高清原图。
+// 列表先显示 800px 缩略图；缩略图就绪后预载 COS 原图，失败或等待 6 秒则预载中清图。
 const publicationImageLinks = [...document.querySelectorAll(".publication-image-link")];
 const publicationFullImages = new Map();
 const publicationThumbnailsReady = Promise.all(publicationImageLinks.map((link) => {
@@ -121,7 +121,7 @@ function loadPublicationFullImage(url, priority = "low") {
     return existing;
   }
 
-  const entry = { image: new Image(), ready: false, promise: null };
+  const entry = { image: new Image(), ready: false, failed: false, promise: null };
   entry.image.decoding = "async";
   entry.image.fetchPriority = priority;
   entry.promise = new Promise((resolve) => {
@@ -131,18 +131,36 @@ function loadPublicationFullImage(url, priority = "low") {
         entry.ready = true;
         resolve(true);
       } catch {
+        entry.failed = true;
         resolve(false);
       }
     };
-    entry.image.onerror = () => resolve(false);
+    entry.image.onerror = () => {
+      entry.failed = true;
+      resolve(false);
+    };
   });
   publicationFullImages.set(url, entry);
   entry.image.src = url;
   return entry;
 }
 
+function preloadPublicationImage(link, priority = "low") {
+  const original = loadPublicationFullImage(link.href, priority);
+  if (original.fallbackScheduled) return original;
+  original.fallbackScheduled = true;
+
+  const loadPreview = () => loadPublicationFullImage(link.dataset.previewSrc);
+  const fallbackTimer = window.setTimeout(loadPreview, 6000);
+  original.promise.then((loaded) => {
+    window.clearTimeout(fallbackTimer);
+    if (!loaded) loadPreview();
+  });
+  return original;
+}
+
 publicationThumbnailsReady.then(() => {
-  publicationImageLinks.forEach((link) => loadPublicationFullImage(link.href));
+  publicationImageLinks.forEach((link) => preloadPublicationImage(link));
 });
 
 // 论文大图：原生 dialog 提供 Esc 关闭和键盘焦点限制。
@@ -225,29 +243,43 @@ publicationImageLinks.forEach((link) => {
     const requestId = ++imageViewerRequestId;
     const thumbnail = link.querySelector("img");
     const cached = publicationFullImages.get(link.href);
+    const previewUrl = new URL(link.dataset.previewSrc, document.baseURI).href;
+    const cachedPreview = publicationFullImages.get(link.dataset.previewSrc);
     imageViewerTrigger = link;
-    imageViewerImage.src = cached?.ready ? link.href : thumbnail.currentSrc || thumbnail.src;
+    imageViewerImage.src = cached?.ready
+      ? link.href
+      : cachedPreview?.ready ? previewUrl : thumbnail.currentSrc || thumbnail.src;
     imageViewerImage.alt = thumbnail.alt;
-    imageViewerStatus.hidden = Boolean(cached?.ready);
-    imageViewerStatus.textContent = isEnglishPage ? "Loading high-resolution image…" : "正在加载高清图…";
+    imageViewerStatus.hidden = Boolean(cached?.ready || cachedPreview?.ready);
+    imageViewerStatus.textContent = isEnglishPage ? "Loading image…" : "正在加载清晰图…";
     document.body.classList.add("image-viewer-open");
     imageViewer.showModal();
     fitImageViewer();
 
     if (!cached?.ready) {
-      publicationThumbnailsReady
-        .then(() => loadPublicationFullImage(link.href, "high").promise)
-        .then((loaded) => {
+      publicationThumbnailsReady.then(() => {
+        const original = preloadPublicationImage(link, "high");
+        // 点开后同时请求中清图；先显示可用的清晰图，原图成功后再替换。
+        const preview = original.ready ? null : loadPublicationFullImage(link.dataset.previewSrc, "high");
+        const updateViewer = () => {
           if (!imageViewer.open || requestId !== imageViewerRequestId) return;
-          if (loaded) {
+          if (original.ready) {
             imageViewerImage.src = link.href;
             imageViewerStatus.hidden = true;
-          } else {
+          } else if (preview?.ready) {
+            imageViewerImage.src = previewUrl;
+            imageViewerStatus.hidden = true;
+          } else if (original.failed && preview?.failed) {
             imageViewerStatus.textContent = isEnglishPage
-              ? "High-resolution image unavailable; showing preview."
-              : "高清图暂时无法加载，当前显示预览图。";
+              ? "Image unavailable; showing thumbnail."
+              : "清晰图暂时无法加载，当前显示缩略图。";
+            imageViewerStatus.hidden = false;
           }
-        });
+        };
+        updateViewer();
+        original.promise.then(updateViewer);
+        preview?.promise.then(updateViewer);
+      });
     }
   });
 });

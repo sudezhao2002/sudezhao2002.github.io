@@ -69,3 +69,9 @@ bash runBeforeUpdate.sh
 ```
 
 页面使用的 Noto Sans SC 和 Noto Serif SC 字体已保存在 `assets/fonts/`，入口为 `assets/fonts/fonts.css`，原始授权文件也保存在该目录中。浏览器按页面用字加载需要的字体分片，无需访问 Google 字体服务；字体异步加载期间先使用系统字体，不阻塞正文和图片显示。
+
+## 论文图片
+
+列表缩略图保存在 `assets/thumbnails/`，宽度 800 像素。中清备用图保存在 `assets/previews/`，最大宽度 1600 像素，原图小于该尺寸时不放大。两者均由 `assets/` 下的原始 PNG 生成，使用 WebP 格式、质量参数 94。
+
+中英文页面的 `.publication-image-link` 中，`href` 是 COS 原图地址，`data-preview-src` 是中清备用图地址，内部 `<img>` 的 `src` 是列表缩略图地址。缩略图加载完后，页面自动预载 COS 原图；COS 报错或等待超过 6 秒时预载备用图。点开图片后优先显示已加载的原图，否则显示备用图，原图稍后加载成功时自动替换，保留当前缩放和拖动位置。
