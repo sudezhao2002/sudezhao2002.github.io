@@ -23,7 +23,8 @@ English version: https://sudezhao2002.github.io/en.html
 
 ## Selected publications
 
-- ReSA: Preserving Reference-Specified Foreground in In-Context Segmentation. Manuscript, 2026; arXiv submission pending moderation. Dezhao Su is the first and corresponding author. Authors: Dezhao Su, Bingxu Hou, Jingdi Lei, Lin Qian, Likai Wang, Yunyun Wan.
+- ReSA: Preserving Reference-Specified Foreground in In-Context Segmentation. arXiv preprint, 2026. Dezhao Su is the first and corresponding author. Authors: Dezhao Su, Bingxu Hou, Jingdi Lei, Lin Qian, Likai Wang, Yunyun Wan.
+- Paper: https://arxiv.org/abs/2611.27341
 
 - From Tasks to Turns: Measuring Human Labor Contributions in Human–Agent Joint Production. arXiv preprint, 2026. Likai Wang and Dezhao Su are co-first authors; Dezhao Su is listed second.
 - Paper: https://arxiv.org/pdf/2610.26365
